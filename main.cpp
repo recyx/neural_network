@@ -1,14 +1,14 @@
 
 #ifdef _WIN32
 #include <SDL.h>
-#include <SDL_image.h>
 #else
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
 #endif
 
 #include <stdio.h>
 #include <string>
+
+#include "circle.h"
 
 #define SCREEN_WIDTH  640
 #define SCREEN_HEIGHT 480
@@ -24,7 +24,6 @@ void init() {
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-	IMG_Init(IMG_INIT_PNG);
 }
 
 int main(int argc, char* args[]) {
@@ -33,6 +32,8 @@ int main(int argc, char* args[]) {
 	init();
 
 	SDL_Event e;
+
+	Circle circle(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 50);
 
 	while(!quit) {
 
@@ -45,6 +46,8 @@ int main(int argc, char* args[]) {
 
 		SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 		SDL_RenderClear(renderer);
+
+		circle.render(renderer);
 
 		SDL_RenderPresent(renderer);
 	}
