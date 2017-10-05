@@ -16,6 +16,8 @@
 SDL_Window* window = NULL;
 SDL_Renderer* renderer = NULL;
 
+
+
 void init() {
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
@@ -33,8 +35,10 @@ int main(int argc, char* args[]) {
 
 	SDL_Event e;
 
-	Circle circle(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 50);
 
+	Circle circle(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 40);
+
+	
 	while(!quit) {
 
 		//Input
