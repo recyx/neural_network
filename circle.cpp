@@ -17,5 +17,11 @@ void Circle::render(SDL_Renderer* renderer) {
 
 	SDL_SetRenderDrawColor(renderer, 0x0, 0x0, 0x0, 0x0);
 
+	for(int dx = -rad; dx <= rad; dx++) {
+		for(int dy = -rad; dy <= rad; dy++) {
+			if(dx*dx + dy*dy <= rad*rad) {
+				SDL_RenderDrawPoint(renderer, x+dx, y+dy);
+			}
+		}
+	}
 }
-
