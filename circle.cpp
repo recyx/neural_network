@@ -17,6 +17,6 @@ void Circle::render(SDL_Renderer* renderer) {
 
 	SDL_SetRenderDrawColor(renderer, 0x0, 0x0, 0x0, 0x0);
 
-	//SDL_RenderDrawLine(renderer, x - rad, y, x);
+	SDL_RenderDrawLine(renderer, x - rad, y, x + rad, y);
 }
 
