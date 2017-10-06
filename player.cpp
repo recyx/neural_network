@@ -61,3 +61,10 @@ void Player::resetPosition() {
 	vx = vy = 0;
 }
 
+Vector Player::getPos() {
+	Vector v;
+	v.x = x;
+	v.y = y;
+	return v;
+}
+

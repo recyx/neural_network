@@ -7,7 +7,7 @@
 
 #include "defines.h"
 #include "net.h"
-#include "Circle.h"
+#include "circle.h"
 
 Net::Net() {
 	width = height = 0;
@@ -38,3 +38,4 @@ void Net::render(SDL_Renderer* renderer) {
 
 	topCircle.render(renderer);
 }
+

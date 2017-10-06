@@ -2,12 +2,12 @@
 #ifndef __BALL_H
 #define __BALL_H
 
-class Ball : Circle {
+class Ball : public Circle {
 	Net net;
 	Vector v, pos;
 	int startX, startY;
 
-	public:
+public:
 	Ball(Net _net);
 
 	void update(float dTime, Vector player1, Vector player2);
