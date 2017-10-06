@@ -24,7 +24,7 @@ void Player::input(float _xInput, float _jumpInput) {
 
 void Player::update(float dTime) {
 	// Apply Input
-	vx += MOVE_SPEED * xInput;
+	vx = MOVE_SPEED * xInput;
 
 	if(jumpInput > 0.5 && y + rad >= SCREEN_HEIGHT) {
 		vy = -JUMP_FORCE;

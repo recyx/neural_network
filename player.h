@@ -2,7 +2,7 @@
 #ifndef __DEFINE_H
 #define __DEFINE_H
 
-class Player : Circle {
+class Player : public Circle {
 
 	Net net;
 	float vx, vy;

@@ -21,6 +21,8 @@
 SDL_Window* window = NULL;
 SDL_Renderer* renderer = NULL;
 
+bool w, a, d;
+
 void init() {
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
@@ -31,6 +33,38 @@ void init() {
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 }
 
+void keyDown(int keycode) {
+	switch(keycode) {
+		case SDLK_w:
+			w = true;
+			break;
+
+		case SDLK_a:
+			a = true;
+			break;
+
+		case SDLK_d:
+			d = true;
+			break;
+	}
+}
+
+void keyUp(int keycode) {
+	switch(keycode) {
+		case SDLK_w:
+			w = false;
+			break;
+
+		case SDLK_a:
+			a = false;
+			break;
+
+		case SDLK_d:
+			d = false;
+			break;
+	}
+}
+
 int main(int argc, char* args[]) {
 	bool quit = false;
 
@@ -38,10 +72,13 @@ int main(int argc, char* args[]) {
 
 	SDL_Event e;
 
-	Circle circle(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 40);
 
 	Net net;
-	net.set(50, 50);
+	net.set(50, 200);
+
+	Player player1(net, 100, SCREEN_HEIGHT / 2);
+	Ball ball(net);
+
 	
 	while(!quit) {
 
@@ -50,12 +87,33 @@ int main(int argc, char* args[]) {
 			if(e.type == SDL_QUIT) {
 				quit = true;
 			}
+
+			if(e.type == SDL_KEYDOWN && e.key.repeat == 0) {
+         	keyDown(e.key.keysym.sym);
+			}
+
+			if(e.type == SDL_KEYUP && e.key.repeat == 0) {
+				keyUp(e.key.keysym.sym);
+			}
 		}
+
+		if(!a && !d) {
+			player1.input(0, w);
+		} else if(a && d) {
+			player1.input(0, w);
+		} else if(a) {
+			player1.input(-1, w);
+		} else if(d) {
+			player1.input(1, w);
+		}
+
+		player1.update(0.01);
 
 		SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 		SDL_RenderClear(renderer);
 
-		circle.render(renderer);
+		player1.render(renderer);
+		net.render(renderer);
 
 		SDL_RenderPresent(renderer);
 	}
