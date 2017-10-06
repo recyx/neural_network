@@ -106,8 +106,8 @@ int main(int argc, char* args[]) {
 			player1.input(1, w);
 		}
 
-		player1.update(0.01);
-		ball.update(0.01, player1.getPos(), player1.getPos());
+		player1.update(0.0166);
+		ball.update(0.0166, player1.getPos(), player1.getPos());
 
 		SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 		SDL_RenderClear(renderer);

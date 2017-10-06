@@ -11,7 +11,7 @@ Circle::Circle() {
 	Circle(0, 0, 0);
 }
 
-Circle::Circle(int _x, int _y, int _rad) {
+Circle::Circle(float _x, float _y, int _rad) {
 	rad = _rad;
 	x = _x;
 	y = _y;

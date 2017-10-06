@@ -5,9 +5,9 @@
 class Circle {
 	public:
 		Circle();
-		Circle(int _x, int _y, int _rad);
+		Circle(float _x, float _y, int _rad);
 
-		int x, y;
+		float x, y;
 		int rad;
 
 		void render(SDL_Renderer* renderer);
