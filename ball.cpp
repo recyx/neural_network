@@ -16,7 +16,7 @@
 Ball::Ball(Net _net) {
 	net = _net;
 	startX = SCREEN_WIDTH / 2;
-	startY = SCREEN_HEIGHT / 2;
+	startY = SCREEN_HEIGHT / 2 - 200;
 	rad = BALL_RADIUS;
 
 	reset(false);
@@ -28,15 +28,17 @@ void Ball::update(float dTime, Vector player1, Vector player2) {
 
 	v.y += GRAVITY * dTime;
 
+	x += v.x * dTime;
+	y += v.y * dTime;
+
+	printf("X: %d\n Y: %d\n", x, y);
+
 	// Check for Collision
 	if((player1 - pos).lenSqr() < (PLAYER_RADIUS + BALL_RADIUS) * (PLAYER_RADIUS + BALL_RADIUS)) {
 		bounce(player1);
 	} else if((player2 - pos).lenSqr() < (PLAYER_RADIUS + BALL_RADIUS) * (PLAYER_RADIUS + BALL_RADIUS)) {
 		bounce(player2);
 	}
-
-	x += v.x;
-	y += v.y;
 
 	// Wall Collision
 	if(x - rad < 0) {
