@@ -30,9 +30,9 @@ void Ball::update(float dTime, Vector player1, Vector player2) {
 
 	// Check for Collision
 	if((player1 - pos).lenSqr() < (PLAYER_RADIUS + BALL_RADIUS) * (PLAYER_RADIUS + BALL_RADIUS)) {
-		Bounce(player1);
+		bounce(player1);
 	} else if((player2 - pos).lenSqr() < (PLAYER_RADIUS + BALL_RADIUS) * (PLAYER_RADIUS + BALL_RADIUS)) {
-		Bounce(player2);
+		bounce(player2);
 	}
 
 	// TODO Net Collision
@@ -53,7 +53,7 @@ void Ball::reset(bool side) {
 	}
 }
 
-void Ball::Bounce(Vector point) {
+void Ball::bounce(Vector point) {
 	Vector distance = point - pos;
 	float velocity = v.len();
 

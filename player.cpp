@@ -39,10 +39,10 @@ void Player::update(float dTime) {
 		vx = SCREEN_WIDTH - x - rad;
 	}
 
-	if(x + rad + vx > net.getLeft() && x + rad + vx < net.getRight()) {
-		vx = net.getLeft() - x - rad;
-	} else if(x - rad + vx < net.getRight() && x - rad + vx > net.getLeft()) {
-		vx = net.getRight - x + rad;
+	if(x + rad + vx > net.left && x + rad + vx < net.right) {
+		vx = net.left - x - rad;
+	} else if(x - rad + vx < net.right && x - rad + vx > net.left) {
+		vx = net.right - x + rad;
 	}
 
 	if(y + rad + vy > SCREEN_HEIGHT) {
