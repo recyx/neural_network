@@ -28,7 +28,6 @@ void Player::update(float dTime) {
 	vy += GRAVITY * dTime * dTime;
 
 	if(jumpInput > 0.5 && y + rad >= SCREEN_HEIGHT - 1) {
-		printf("jump\n");
 		vy = -JUMP_FORCE;
 	}
 

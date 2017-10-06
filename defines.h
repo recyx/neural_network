@@ -7,11 +7,13 @@
 
 #define MOVE_SPEED 500
 #define JUMP_FORCE 14
-#define GRAVITY 1300
+#define GRAVITY 700
 
 #define PLAYER_RADIUS 30
 
 #define BALL_RADIUS 30
-#define BALL_STARTING_VELOCITY 50
+#define BALL_STARTING_VELOCITY 500
+
+#define BOUNCE_RATE 0.7
 
 #endif // __DEFINES_H

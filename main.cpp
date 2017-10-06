@@ -22,7 +22,6 @@ SDL_Renderer* renderer = NULL;
 bool w, a, d;
 
 void init() {
-	printf("test");
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
 
