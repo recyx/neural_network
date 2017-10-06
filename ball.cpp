@@ -22,7 +22,7 @@ Ball::Ball(Net _net) {
 	reset(false);
 }
 
-void Ball::update(float dTime, Vector player1, Vector player2) { 
+void Ball::update(float dTime, Vector player1, Vector player2) {
 	pos.x = x;
 	pos.y = y;
 
@@ -61,13 +61,12 @@ void Ball::bounce(Vector point) {
 	float a = acos((v.x * distance.x + v.y * distance.y) / velocity * distance.len() );
 
 	// Angle of Velocity to Ground
-	float b = asin(v.y / velocity); 
+	float b = asin(v.y / velocity);
 
 	// Angle of Deflection
-	float c = a + b;
+	float c = 2 * a + b;
 
 	// New Velocity
 	v.x = cos(c) * v.x;
 	v.y = sin(c) * v.y;
 }
-
