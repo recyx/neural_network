@@ -5,7 +5,7 @@
 #include <SDL2/SDL.h>
 #endif
 
-#include "defines.h"
+#include "common.h"
 #include "net.h"
 #include "circle.h"
 

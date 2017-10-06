@@ -4,15 +4,18 @@
 
 class Ball : public Circle {
 	Net net;
-	Vector v, pos;
 	int startX, startY;
 
 public:
 	Ball(Net _net);
+	Vector v, oldV, pos;
 
-	void update(float dTime, Vector player1, Vector player2);
+
+	bool hit = false;
+
+	void update(float dTime, Vector player1, Vector velocity1, Vector player2, Vector velocity2);
 	void reset(bool side); // 0 left, 1 right
-	void bounce(Vector point, float dTime);
+	void bounce(Vector point, Vector vel, float dTime);
 
 };
 

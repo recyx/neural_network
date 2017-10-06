@@ -5,7 +5,7 @@
 #include <SDL2/SDL.h>
 #endif
 
-#include "defines.h"
+#include "common.h"
 #include "circle.h"
 #include "net.h"
 #include "player.h"
@@ -62,8 +62,16 @@ void Player::resetPosition() {
 }
 
 Vector Player::getPos() {
-	Vector v;
-	v.x = x;
-	v.y = y;
-	return v;
+	Vector pos;
+	pos.x = x;
+	pos.y = y;
+	return pos;
 }
+
+Vector Player::getVel() {
+	Vector vel;
+	vel.x = vx;
+	vel.y = vy;
+	return vel;
+}
+

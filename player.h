@@ -18,6 +18,7 @@ public:
 	void resetPosition();
 
 	Vector getPos();
+	Vector getVel();
 
 };
 

@@ -7,7 +7,7 @@
 
 #include <math.h>
 
-#include "defines.h"
+#include "common.h"
 #include "vector.h"
 #include "net.h"
 #include "circle.h"
@@ -22,7 +22,11 @@ Ball::Ball(Net _net) {
 	reset(false);
 }
 
-void Ball::update(float dTime, Vector player1, Vector player2) {
+void Ball::update(float dTime, Vector player1, Vector velocity1, Vector player2, Vector velocity2) {
+	Vector zero;
+	zero.x = 0;
+	zero.y = 0;
+
 	pos.x = x;
 	pos.y = y;
 
@@ -34,14 +38,16 @@ void Ball::update(float dTime, Vector player1, Vector player2) {
 	//printf("X: %f\n", x);
 	//printf("Y: %f\n", y);
 
+	bool bounced = false;
+	oldV = v;
 
 	//printf("X: %d\n Y: %d\n", x, y);
 
 	// Check for Collision
 	if((player1 - pos).lenSqr() < (PLAYER_RADIUS + BALL_RADIUS) * (PLAYER_RADIUS + BALL_RADIUS)) {
-		bounce(player1, dTime);
+		bounce(player1, velocity1, dTime);
 	} else if((player2 - pos).lenSqr() < (PLAYER_RADIUS + BALL_RADIUS) * (PLAYER_RADIUS + BALL_RADIUS)) {
-		bounce(player2, dTime);
+		bounce(player2, velocity2, dTime);
 	}
 
 	// Wall Collision
@@ -62,9 +68,10 @@ void Ball::update(float dTime, Vector player1, Vector player2) {
 		v.x = -v.x * BOUNCE_RATE;
 		x = net.right + 2 * rad - (x - net.right);
 	}
+
 	// Net Collision top
 	if((net.topCenter - pos).lenSqr() < (BALL_RADIUS + net.width / 2) * (BALL_RADIUS + net.width / 2)) {
-		//bounce(net.topCenter);
+		bounce(net.topCenter, zero, dTime);
 	}
 
 
@@ -89,28 +96,30 @@ void Ball::reset(bool side) {
 	}
 }
 
-void Ball::bounce(Vector point, float dTime) {
+void Ball::bounce(Vector point, Vector vel, float dTime) {
+	//hit = true;
 	Vector distance = point - pos;
 	v.x *= dTime;
 	v.y *= dTime;
 	float velocity = v.len();
 
 	// Angle of Impact
-	float a = acos((v.x * distance.x + v.y * distance.y) / velocity * distance.len()) * 180.0 / PI;
-	printf("pre acos %f\n", (v.x * distance.x + v.y * distance.y) / velocity * distance.len());
-	printf("aaaaaaaaaaaa %f\n", a);
-
+	float a = atan2(point.y - pos.y, point.x - pos.x);
+	
 	// Angle of Velocity to Ground
-	float b = asin(v.y / velocity);
+	float b = atan2(v.y, v.x);
 
 	// Angle of Deflection
-	float c = 2 * a + b;
+	float c = 2 * a - b;
 
 	// New Velocity and Position
-	x -= v.x;
-	y -= v.y;
+	//x -= v.x + 30;
+	//y -= v.y + 30;
 
-	v.x = cos(c) * v.x / dTime;
-	v.y = sin(c) * v.y / dTime;
+	v.x = -(cos(c) * velocity / dTime) + vel.x;
+	v.y = -(sin(c) * velocity / dTime) + vel.y;
 
+	x += v.x * dTime - 3;
+	y += v.y * dTime - 3;
 }
+

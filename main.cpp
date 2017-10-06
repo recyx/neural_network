@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <string>
 
-#include "defines.h"
+#include "common.h"
 #include "vector.h"
 #include "circle.h"
 #include "net.h"
@@ -19,6 +19,7 @@
 SDL_Window* window = NULL;
 SDL_Renderer* renderer = NULL;
 
+double lastTime, dTime;
 bool w, a, d;
 
 void init() {
@@ -66,10 +67,11 @@ void keyUp(int keycode) {
 int main(int argc, char* args[]) {
 	bool quit = false;
 
+	lastTime = curTime();
+
 	init();
 
 	SDL_Event e;
-
 
 	Net net;
 	net.set(29, 200);
@@ -79,6 +81,11 @@ int main(int argc, char* args[]) {
 
 
 	while(!quit) {
+		dTime = curTime() - lastTime;
+		dTime = dTime / 1000;
+		lastTime = curTime();
+
+		printf("dTime: %f\n", dTime);
 
 		//Input
 		while(SDL_PollEvent(&e) != 0) {
@@ -105,16 +112,37 @@ int main(int argc, char* args[]) {
 			player1.input(1, w);
 		}
 
-		player1.update(0.0166);
-		ball.update(0.0166, player1.getPos(), player1.getPos());
+		player1.update(dTime);
+		ball.update(dTime, player1.getPos(), player1.getVel(), player1.getPos(), player1.getVel());
 
 		SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 		SDL_RenderClear(renderer);
+
+		/*
+		if(!ball.hit) {
+			player1.update(0.0166);
+			ball.update(0.0166, player1.getPos(), player1.getPos());
+		}
+		*/
+
 
 
 		player1.render(renderer);
 		net.render(renderer);
 		ball.render(renderer);
+
+		SDL_SetRenderDrawColor(renderer, 0xFF, 0x0, 0x0, 0x0);
+		SDL_RenderDrawLine(renderer, player1.x, player1.y, ball.x, ball.y);
+		SDL_SetRenderDrawColor(renderer, 0x0, 0xFF, 0x0, 0x0);
+		SDL_RenderDrawLine(renderer, ball.x - ball.v.x * 0.0166 * 5, ball.y - ball.v.y * 0.0166 * 5, ball.x + ball.v.x * 0.0166 * 5, ball.y + ball.v.y * 0.0166 * 5);
+		//SDL_RenderDrawLine(renderer, ball.x, ball.y, ball.x + ball.v.x * 0.0166 * 5, ball.y + ball.v.y * 0.0166 * 5);
+		SDL_SetRenderDrawColor(renderer, 0x0, 0x0, 0xFF, 0x0);
+		SDL_RenderDrawLine(renderer, ball.x - ball.oldV.x * 0.0166 * 5, ball.y - ball.oldV.y * 0.0166 * 5, ball.x + ball.oldV.x * 0.0166 * 5, ball.y + ball.oldV.y * 0.0166 * 5);
+		//SDL_RenderDrawLine(renderer, ball.x, ball.y, ball.x + ball.oldV.x * 0.0166 * 5, ball.y + ball.oldV.y * 0.0166 * 5);
+
+
+		//printf("OldLen: %f\n", ball.oldV.len());
+		//printf("NewLen: %f\n", ball.v.len());
 
 		SDL_RenderPresent(renderer);
 
