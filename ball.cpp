@@ -64,7 +64,7 @@ void Ball::bounce(Vector point) {
 	float b = asin(v.y / velocity);
 
 	// Angle of Deflection
-	float c = a + b;
+	float c = 2 * a + b;
 
 	// New Velocity
 	v.x = cos(c) * v.x;
