@@ -1,6 +1,7 @@
 
 #ifdef _WIN32
 #include <SDL.h>
+#include <iostream>
 #else
 #include <SDL2/SDL.h>
 #endif
@@ -24,6 +25,7 @@ SDL_Renderer* renderer = NULL;
 bool w, a, d;
 
 void init() {
+	printf("test");
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
 
@@ -74,12 +76,12 @@ int main(int argc, char* args[]) {
 
 
 	Net net;
-	net.set(50, 200);
+	net.set(29, 200);
 
 	Player player1(net, 100, SCREEN_HEIGHT / 2);
 	Ball ball(net);
 
-	
+
 	while(!quit) {
 
 		//Input
@@ -116,5 +118,6 @@ int main(int argc, char* args[]) {
 		net.render(renderer);
 
 		SDL_RenderPresent(renderer);
+
 	}
 }
