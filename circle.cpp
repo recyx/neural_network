@@ -7,6 +7,10 @@
 
 #include "circle.h"
 
+Circle::Circle() {
+	Circle(0, 0, 0);
+}
+
 Circle::Circle(int _x, int _y, int _rad) {
 	rad = _rad;
 	x = _x;
@@ -25,3 +29,4 @@ void Circle::render(SDL_Renderer* renderer) {
 		}
 	}
 }
+

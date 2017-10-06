@@ -9,4 +9,9 @@
 #define JUMP_FORCE 20
 #define GRAVITY 10
 
+#define PLAYER_RADIUS 50
+
+#define BALL_RADIUS 30
+#define BALL_STARTING_VELOCITY 10
+
 #endif // __DEFINES_H
