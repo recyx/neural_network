@@ -8,7 +8,12 @@
 #include <stdio.h>
 #include <string>
 
+#include "defines.h"
+#include "vector.h"
 #include "circle.h"
+#include "net.h"
+#include "player.h"
+#include "ball.h"
 
 #define SCREEN_WIDTH  640
 #define SCREEN_HEIGHT 480
@@ -34,6 +39,8 @@ int main(int argc, char* args[]) {
 	SDL_Event e;
 
 	Circle circle(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 40);
+	Net net;
+	net.set(50, 50);
 	
 	while(!quit) {
 
