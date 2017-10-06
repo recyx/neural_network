@@ -2,6 +2,8 @@
 #ifndef __VECTOR_H
 #define __VECTOR_H
 
+#include <math.h>
+
 struct Vector {
 	double x, y;
 
@@ -15,4 +17,3 @@ inline Vector operator+(const Vector &v1, const Vector &v2)    { Vector r; r.x =
 inline Vector operator-(const Vector &v1, const Vector &v2)    { Vector r; r.x = v1.x - v2.x; r.y = v1.y - v2.y; return r; };
 
 #endif // __VECTOR_H
-
