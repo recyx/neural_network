@@ -6,7 +6,7 @@
 #define SCREEN_HEIGHT 480
 
 #define MOVE_SPEED 500
-#define JUMP_FORCE 14
+#define JUMP_FORCE 800
 #define GRAVITY 1300
 
 #define PLAYER_RADIUS 30

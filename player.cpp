@@ -24,35 +24,35 @@ void Player::input(float _xInput, float _jumpInput) {
 
 void Player::update(float dTime) {
 	// Apply Input
-	vx = MOVE_SPEED * xInput * dTime;
-	vy += GRAVITY * dTime * dTime;
+	vx = MOVE_SPEED * xInput;
+	vy += GRAVITY * dTime;
 
 	if(jumpInput > 0.5 && y + rad >= SCREEN_HEIGHT - 1) {
-		printf("jump\n");
+		//printf("jump\n");
 		vy = -JUMP_FORCE;
 	}
 
 
 	// Collision
-	if(x + vx < rad) {
-		vx = -x + rad;
-	} else if(x + vx > SCREEN_WIDTH - rad) {
-		vx = (SCREEN_WIDTH - x - rad) * dTime;
+	if(x + vx * dTime < rad) {
+		vx = (-x + rad) / dTime;
+	} else if(x + vx * dTime > SCREEN_WIDTH - rad) {
+		vx = (SCREEN_WIDTH - x - rad) / dTime;
 	}
 
-	if(x + rad + vx > net.left && x + rad + vx < net.right) {
-		vx = (net.left - x - rad) * dTime;
-	} else if(x - rad + vx < net.right && x - rad + vx > net.left) {
-		vx = (net.right - x + rad) * dTime;
+	if(x + rad + vx * dTime > net.left && x + rad + vx * dTime < net.right) {
+		vx = (net.left - x - rad) / dTime;
+	} else if(x - rad + vx * dTime < net.right && x - rad + vx * dTime > net.left) {
+		vx = (net.right - x + rad) / dTime;
 	}
 
-	if(y + rad + vy > SCREEN_HEIGHT) {
-		vy = (SCREEN_HEIGHT - y - rad) * dTime;
+	if(y + rad + vy * dTime > SCREEN_HEIGHT) {
+		vy = (SCREEN_HEIGHT - y - rad) / dTime;
 	}
 
 	// Apply Velocity
-	x += vx;
-	y += vy;
+	x += vx * dTime;
+	y += vy * dTime;
 
 }
 
@@ -68,4 +68,3 @@ Vector Player::getPos() {
 	v.y = y;
 	return v;
 }
-
