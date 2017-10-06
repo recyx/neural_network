@@ -2,6 +2,8 @@
 #ifndef __DEFINES_H
 #define __DEFINES_H
 
+#define PI 3.14159265
+  
 #define SCREEN_WIDTH  640
 #define SCREEN_HEIGHT 480
 

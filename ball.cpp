@@ -38,13 +38,11 @@ void Ball::update(float dTime, Vector player1, Vector player2) {
 	//printf("X: %d\n Y: %d\n", x, y);
 	
 	// Check for Collision
-	/*
 	if((player1 - pos).lenSqr() < (PLAYER_RADIUS + BALL_RADIUS) * (PLAYER_RADIUS + BALL_RADIUS)) {
-		bounce(player1);
+		bounce(player1, dTime);
 	} else if((player2 - pos).lenSqr() < (PLAYER_RADIUS + BALL_RADIUS) * (PLAYER_RADIUS + BALL_RADIUS)) {
-		bounce(player2);
+		bounce(player2, dTime);
 	}
-	*/
 
 	// Wall Collision
 	if(x - rad < 0) {
@@ -91,12 +89,16 @@ void Ball::reset(bool side) {
 	}
 }
 
-void Ball::bounce(Vector point) {
+void Ball::bounce(Vector point, float dTime) {
 	Vector distance = point - pos;
+	v.x *= dTime;
+	v.y *= dTime;
 	float velocity = v.len();
 
 	// Angle of Impact
-	float a = acos((v.x * distance.x + v.y * distance.y) / velocity * distance.len() );
+	float a = acos((v.x * distance.x + v.y * distance.y) / velocity * distance.len()) * 180.0 / PI;
+	printf("pre acos %f\n", (v.x * distance.x + v.y * distance.y) / velocity * distance.len());
+	printf("aaaaaaaaaaaa %f\n", a);
 
 	// Angle of Velocity to Ground
 	float b = asin(v.y / velocity);
@@ -104,7 +106,11 @@ void Ball::bounce(Vector point) {
 	// Angle of Deflection
 	float c = 2 * a + b;
 
-	// New Velocity
-	v.x = cos(c) * v.x;
-	v.y = sin(c) * v.y;
+	// New Velocity and Position
+	x -= v.x;
+	y -= v.y;
+
+	v.x = cos(c) * v.x / dTime;
+	v.y = sin(c) * v.y / dTime;
+
 }

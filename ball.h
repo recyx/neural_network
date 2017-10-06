@@ -12,7 +12,7 @@ public:
 
 	void update(float dTime, Vector player1, Vector player2);
 	void reset(bool side); // 0 left, 1 right
-	void bounce(Vector point);
+	void bounce(Vector point, float dTime);
 
 };
 
