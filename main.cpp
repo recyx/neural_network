@@ -38,7 +38,7 @@ int main(int argc, char* args[]) {
 
 	Circle circle(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 40);
 
-	
+
 	while(!quit) {
 
 		//Input
