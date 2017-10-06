@@ -30,13 +30,13 @@ void Ball::update(float dTime, Vector player1, Vector player2) {
 
 	x += v.x * dTime;
 	y += v.y * dTime;
-	
+
 	//printf("X: %f\n", x);
 	//printf("Y: %f\n", y);
 
 
 	//printf("X: %d\n Y: %d\n", x, y);
-	
+
 	// Check for Collision
 	/*
 	if((player1 - pos).lenSqr() < (PLAYER_RADIUS + BALL_RADIUS) * (PLAYER_RADIUS + BALL_RADIUS)) {
@@ -55,20 +55,20 @@ void Ball::update(float dTime, Vector player1, Vector player2) {
 		x = SCREEN_WIDTH - 2 * rad + (SCREEN_WIDTH - x);
 	}
 
-	/*
+
 	// Net Collision Side
-	if(x + rad > net.left && x + rad < net.right && y <= net.top) {
+	if(x + rad > net.left && x + rad < net.right && y > net.top) {
 		v.x = -v.x * BOUNCE_RATE;
 		x = net.left - 2 * rad + (net.left - x);
-	} else if(x - rad < net.right && x - rad > net.left && y <= net.top) {
+	} else if(x - rad < net.right && x - rad > net.left && y > net.top) {
 		v.x = -v.x * BOUNCE_RATE;
 		x = net.right + 2 * rad - (x - net.right);
 	}
 	// Net Collision top
 	if((net.topCenter - pos).lenSqr() < (BALL_RADIUS + net.width / 2) * (BALL_RADIUS + net.width / 2)) {
-		bounce(net.topCenter);
+		//bounce(net.topCenter);
 	}
-	*/
+
 
 	//Ground Collision
 	if(y + rad > SCREEN_HEIGHT) {
