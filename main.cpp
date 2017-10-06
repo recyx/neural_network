@@ -16,9 +16,6 @@
 #include "player.h"
 #include "ball.h"
 
-#define SCREEN_WIDTH  640
-#define SCREEN_HEIGHT 480
-
 SDL_Window* window = NULL;
 SDL_Renderer* renderer = NULL;
 
