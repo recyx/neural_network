@@ -35,10 +35,36 @@ void Ball::update(float dTime, Vector player1, Vector player2) {
 		bounce(player2);
 	}
 
-	// TODO Net Collision
-
 	x += v.x;
 	y += v.y;
+
+	// Wall Collision
+	if(x - rad < 0) {
+		v.x -= v.x;
+		x = 2 * rad - x;
+	} else if (x + rad > SCREEN_WIDTH) {
+		v.x -= v.x;
+		x = SCREEN_WIDTH - 2 * rad + (SCREEN_WIDTH - x);
+	}
+
+	// Net Collision Side
+	if(x + rad > net.left && x + rad < net.right && y <= net.top) {
+		v.x -= v.x;
+		x = net.left - 2 * rad + (net.left - x);
+	} else if(x - rad < net.right && x - rad > net.left && y <= net.top) {
+		v.x -= v.x;
+		x = net.right + 2 * rad - (x - net.right);
+	}
+	// Net Collision top
+	if((net.topCenter - pos).lenSqr() < (BALL_RADIUS + net.width / 2) * (BALL_RADIUS + net.width / 2)) {
+		bounce(net.topCenter);
+	}
+
+	//Ground Collision
+	if(y + rad > SCREEN_HEIGHT) {
+		v.y -= v.y;
+		y = SCREEN_HEIGHT - 2 * rad + (SCREEN_HEIGHT - y);
+	}
 }
 
 void Ball::reset(bool side) {
