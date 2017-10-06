@@ -17,6 +17,8 @@ public:
 	void update(float dTime);
 	void resetPosition();
 
+	Vector getPos();
+
 };
 
 #endif // __DEFINE_H

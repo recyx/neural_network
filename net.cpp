@@ -46,3 +46,4 @@ void Net::render(SDL_Renderer* renderer) {
 		}
 	}
 }
+

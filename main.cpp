@@ -75,7 +75,7 @@ int main(int argc, char* args[]) {
 	Net net;
 	net.set(29, 200);
 
-	Player player1(net, 100, SCREEN_HEIGHT / 2);
+	Player player1(net, 100, SCREEN_HEIGHT - PLAYER_RADIUS * 2 - 20);
 	Ball ball(net);
 
 
@@ -107,14 +107,18 @@ int main(int argc, char* args[]) {
 		}
 
 		player1.update(0.01);
+		//ball.update(0.01, player1.getPos(), player1.getPos());
 
 		SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 		SDL_RenderClear(renderer);
 
+
 		player1.render(renderer);
 		net.render(renderer);
+		//ball.render(renderer);
 
 		SDL_RenderPresent(renderer);
 
 	}
 }
+
