@@ -31,8 +31,9 @@ void Ball::update(float dTime, Vector player1, Vector player2) {
 	x += v.x * dTime;
 	y += v.y * dTime;
 
-	//printf("X: %d\n Y: %d\n", x, y);
 
+	//printf("X: %d\n Y: %d\n", x, y);
+	
 	// Check for Collision
 	if((player1 - pos).lenSqr() < (PLAYER_RADIUS + BALL_RADIUS) * (PLAYER_RADIUS + BALL_RADIUS)) {
 		bounce(player1);
