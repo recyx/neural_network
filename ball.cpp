@@ -27,8 +27,6 @@ void Ball::update(float dTime, Vector player1, Vector velocity1, Vector player2,
 	zero.x = 0;
 	zero.y = 0;
 
-	pos.x = x;
-	pos.y = y;
 
 	v.y += GRAVITY * dTime;
 
@@ -38,8 +36,10 @@ void Ball::update(float dTime, Vector player1, Vector velocity1, Vector player2,
 	//printf("X: %f\n", x);
 	//printf("Y: %f\n", y);
 
-	bool bounced = false;
 	oldV = v;
+
+	pos.x = x;
+	pos.y = y;
 
 	//printf("X: %d\n Y: %d\n", x, y);
 
@@ -80,7 +80,7 @@ void Ball::update(float dTime, Vector player1, Vector velocity1, Vector player2,
 		v.y = -v.y * BOUNCE_RATE;
 		v.x = v.x * BOUNCE_RATE;
 		y = SCREEN_HEIGHT - 2 * rad + (SCREEN_HEIGHT - y);
-		//reset(0);
+		reset(0);
 	}
 }
 
@@ -116,10 +116,10 @@ void Ball::bounce(Vector point, Vector vel, float dTime) {
 	//x -= v.x + 30;
 	//y -= v.y + 30;
 
-	v.x = -(cos(c) * velocity / dTime) + vel.x;
-	v.y = -(sin(c) * velocity / dTime) + vel.y;
+	v.x = -(cos(c) * velocity * BOUNCE_RATE * 0.5 / dTime) + vel.x;
+	v.y = -(sin(c) * velocity * BOUNCE_RATE * 0.5 / dTime) + vel.y;
 
-	x += v.x * dTime - 3;
-	y += v.y * dTime - 3;
+	x += v.x * dTime;
+	y += v.y * dTime;
 }
 

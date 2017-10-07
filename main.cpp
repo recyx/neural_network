@@ -85,7 +85,7 @@ int main(int argc, char* args[]) {
 		dTime = dTime / 1000;
 		lastTime = curTime();
 
-		printf("dTime: %f\n", dTime);
+		//printf("dTime: %f\n", dTime);
 
 		//Input
 		while(SDL_PollEvent(&e) != 0) {
